@@ -43,7 +43,7 @@ var postURL = "https://www.google.com/recaptcha/api/siteverify"
 // Verify method, verifies if current request have valid re-captcha response and returns true or false
 // This method also records any errors in validation.
 // These errors can be received by calling LastError() method.
-func (r *R) Verify(response String) bool {
+func (r *R) Verify(response string) bool {
 	r.lastError = make([]string, 1)
 	client := &http.Client{Timeout: 20 * time.Second}
 	resp, err := client.PostForm(postURL,
