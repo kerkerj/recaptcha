@@ -4,7 +4,7 @@ Installation
 ----------------
 
 ```
-go get github.com/haisum/recaptcha
+go get github.com/kerkerj/recaptcha
 
 ```
 
@@ -17,4 +17,4 @@ Usage example can be found in example/main.go file.
 Documentation
 ----------------
 
-Available on godocs: http://godoc.org/github.com/haisum/recaptcha
+Available on godocs: http://godoc.org/github.com/kerkerj/recaptcha

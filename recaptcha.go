@@ -1,19 +1,3 @@
-// Package recaptcha is google golang module for google re-captcha.
-//
-// Installation
-//
-//   go get github.com/haisum/recaptcha
-//
-// Usage
-//
-// Usage example can be found in example/main.go file.
-//
-//
-// Source code
-//
-// Available on github: http://github.com/haisum/recaptcha
-//
-// Author: Haisum (haisumbhatti@gmail.com)
 package recaptcha
 
 import (

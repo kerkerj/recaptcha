@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/haisum/recaptcha"
 	"log"
 	"net/http"
+
+	"github.com/kerkerj/recaptcha"
 )
 
 func main() {
