@@ -18,3 +18,5 @@ Documentation
 ----------------
 
 Available on godocs: http://godoc.org/github.com/kerkerj/recaptcha
+
+Google reCAPTCHA guides: https://developers.google.com/recaptcha/intro

@@ -32,7 +32,10 @@ func main() {
 		fmt.Fprintf(w, form)
 	})
 	http.HandleFunc("/submit", func(w http.ResponseWriter, r *http.Request) {
-		isValid := re.Verify(*r)
+		// L36,37 is what we need to do with this library
+		challenge := r.FormValue("g-recaptcha-response")
+		isValid := re.Verify(challenge)
+
 		if isValid {
 			fmt.Fprintf(w, "Valid")
 		} else {

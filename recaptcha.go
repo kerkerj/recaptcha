@@ -24,7 +24,7 @@ type googleResponse struct {
 // url to post submitted re-captcha response to
 var postURL = "https://www.google.com/recaptcha/api/siteverify"
 
-// Verify method, verifies if current request have valid re-captcha response and returns true or false
+// Verify method, verifies if the response string is valid re-captcha response and returns true or false
 // This method also records any errors in validation.
 // These errors can be received by calling LastError() method.
 func (r *R) Verify(response string) bool {
