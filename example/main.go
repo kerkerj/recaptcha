@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	// Setup
 	sitekey := "{Your site key here}"
 	re := recaptcha.R{
 		Secret: "{Your secret here}",
