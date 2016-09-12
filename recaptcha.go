@@ -24,30 +24,38 @@ type googleResponse struct {
 // url to post submitted re-captcha response to
 var postURL = "https://www.google.com/recaptcha/api/siteverify"
 
+func doPostRequest(postUrl string, strToVerify string, r *R) (*http.Response, error) {
+	client := &http.Client{Timeout: 20 * time.Second}
+	resp, err := client.PostForm(postUrl, url.Values{"secret": {r.Secret}, "response": {strToVerify}})
+
+	return resp, err
+}
+
 // Verify method, verifies if the response string is valid re-captcha response and returns true or false
 // This method also records any errors in validation.
 // These errors can be received by calling LastError() method.
 func (r *R) Verify(response string) bool {
 	r.lastError = make([]string, 1)
-	client := &http.Client{Timeout: 20 * time.Second}
-	resp, err := client.PostForm(postURL,
-		url.Values{"secret": {r.Secret}, "response": {response}})
+
+	resp, err := doPostRequest(postURL, response, r)
 	if err != nil {
 		r.lastError = append(r.lastError, err.Error())
 		return false
 	}
 	defer resp.Body.Close()
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		r.lastError = append(r.lastError, err.Error())
 		return false
 	}
+
 	gr := new(googleResponse)
-	err = json.Unmarshal(body, gr)
-	if err != nil {
+	if err = json.Unmarshal(body, gr); err != nil {
 		r.lastError = append(r.lastError, err.Error())
 		return false
 	}
+
 	if !gr.Success {
 		r.lastError = append(r.lastError, gr.ErrorCodes...)
 	}

@@ -4,13 +4,47 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
-	"github.com/kerkerj/recaptcha"
+	"testing"
 )
+
+func TestLastError(t *testing.T) {
+	// Arrange
+	testSecret := "test_recaptcha_secret"
+	re := R{
+		Secret: testSecret,
+	}
+
+	// Act
+	lastError := re.LastError()
+
+	// Assert
+	if len(lastError) > 1 {
+		t.Errorf("re.LastError() returned %s, expected %s", lastError, "[]")
+	}
+
+}
+
+func TestVerify(t *testing.T) {
+	// Arrange
+	testSecret := "test_recaptcha_secret"
+	testResponseChallenge := "test_recaptcha_response_challenge"
+
+	re := R{
+		Secret: testSecret,
+	}
+
+	// Act
+	result := re.Verify(testResponseChallenge)
+
+	// Assert
+	if result != false {
+		t.Errorf("re.Verify(%s) returned %b, expected %b", testResponseChallenge, result, false)
+	}
+}
 
 func ExampleR_Verify() {
 	sitekey := "{Your site key here}"
-	re := recaptcha.R{
+	re := R{
 		Secret: "{Your secret here}",
 	}
 
